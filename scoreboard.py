@@ -10,7 +10,7 @@ class Scoreboard(Turtle):
         self.color("white")
         # levanta a caneta para evitar linhas
         self.penup() 
-        self.goto(0, 260)
+        self.goto(0, 250)
         self.update_scoreboard()
         self.hideturtle()
 
