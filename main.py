@@ -53,17 +53,16 @@ while game_is_on:
         # Reinicia a posição da comida
         food.refresh()
 
-    # Se a cobra colidir com uma parede...
+    # Se a cobra colidir com uma parede, reseta o jogo
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        # Finaliza o jogo
-        game_is_on = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset()
 
     # Detecta colisão da cobra com sua cauda, saltando a cabeça
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
             game_is_on = False
             scoreboard.game_over()
-            
+
 # Evita que a tela se feche após a execução. Ela se fechará com um clique
 screen.exitonclick()

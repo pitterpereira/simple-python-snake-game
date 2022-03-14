@@ -7,6 +7,11 @@ class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
         self.score = 0
+
+        # Lê o último recorde
+        with open("data.txt", "r") as data:
+            self.high_score = int(data.read())
+
         self.color("white")
         # levanta a caneta para evitar linhas
         self.penup() 
@@ -17,14 +22,19 @@ class Scoreboard(Turtle):
     # Limpa os dados da tela e seta novos
     def update_scoreboard(self):
         self.clear()
-        self.write(f"Score: {self.score}", align=ALIGNMENT, font=FONT)
+        self.write(f"Score: {self.score} | High Score: {self.high_score}", align=ALIGNMENT, font=FONT)
 
     # Aumenta o placar
     def increase_score(self):
         self.score += 1
         self.update_scoreboard()
 
-    def game_over(self):
-        # Centraliza o texto na tela
-        self.goto(0, 0)
-        self.write(f"GAME OVER!", align=ALIGNMENT, font=FONT)
+    def reset(self):
+        # Se a nova pontuação for maior que a anterior, declarar novo recorde
+        if self.score > self.high_score:
+            self.high_score = self.score
+        self.score = 0
+        # Escreve o último recorde no arquivo data.txt
+        with open("data.txt", "w") as data:
+            data.write(f"{self.high_score}")
+        self.update_scoreboard()

@@ -70,3 +70,13 @@ class Snake:
         """ Pega a posição do último da lista e adiciona lá """
 
         self.add_segment(self.segments[-1].position())
+
+    def reset(self):
+        # Remove as tartarugas da tela
+        for seg in self.segments:
+            seg.goto(1000, 1000)
+        # Remove todos os segmentos da cobra
+        self.segments.clear()
+        # E os cria novamente
+        self.create_snake()
+        self.head = self.segments[0]
